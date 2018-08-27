@@ -1,0 +1,97 @@
+<html>
+<head>
+	<link rel=stylesheet type=text/css href='{{ url_for('static', filename='styles.css') }}'>
+</head>
+<body>
+
+
+{% if items %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+	{% for message in messages %}
+	<li><strong>{{message}}</strong></li>
+	{% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+<!-- Menu Section -->
+<div class="w3-row w3-padding-64" id="menu">
+	<div class="w3-col l6 w3-padding-large">
+		<h1 class="w3-center">{{restaurant.name}}</h1><br>
+		<a href = '{{url_for('newMenuItem', restaurant_id=restaurant.id)}}'>Add New Menu Item</a>
+		</br>
+		<a href = '{{url_for('editFastingStatus', restaurant_id=restaurant.id)}}'>Add Fasting Status</a>
+		</br>
+		<a href = '{{url_for('addObservation', restaurant_id=restaurant.id)}}'>Add Observations</a>
+		
+		<h2>Fast Day? </h2>
+		{% for fast in fastingStatus %}
+		<h4>{{fast.fasting}}</h4>
+		{% endfor %}
+
+
+		<h2>Observations: </h2>
+		{% for obs in observat %}
+		<h4>{{obs.description}}</h4>
+		{% endfor %}
+
+
+		<h2>Appetizers: </h2>
+		{% for item in items %}
+		{% if item.course == 'Appetizer' %}
+		<h4>{{item.name}}</h4>
+		<a href='{{url_for('editMenuItem', restaurant_id=restaurant.id, menu_id=item.id)}}'>Edit</a></br>
+		<a href='{{url_for('deleteMenuItem', restaurant_id=restaurant.id, menu_id=item.id)}}' >Delete</a>
+		<p class="w3-text-grey">{{item.description}}</p>
+		<p class="w3-text-grey">{{item.calories}} calories</p>
+		{% endif %}
+		{% endfor %}
+
+		<h2>Entrees: </h2>
+		{% for item in items %}
+		{% if item.course == 'Entree' %}
+		<h4>{{item.name}}</h4>
+		<a href='{{url_for('editMenuItem', restaurant_id=restaurant.id, menu_id=item.id)}}'>Edit</a></br>
+		<a href='{{url_for('deleteMenuItem', restaurant_id=restaurant.id, menu_id=item.id)}}' >Delete</a>
+		<p class="w3-text-grey">{{item.description}}</p>
+		<p class="w3-text-grey">{{item.calories}} calories</p>
+		{% endif %}
+		{% endfor %}
+
+		<h2>Dessert: </h2>
+		{% for item in items %}
+		{% if item.course == 'Dessert' %}
+		<h4>{{item.name}}</h4>
+		<a href='{{url_for('editMenuItem', restaurant_id=restaurant.id, menu_id=item.id)}}'>Edit</a></br>
+		<a href='{{url_for('deleteMenuItem', restaurant_id=restaurant.id, menu_id=item.id)}}' >Delete</a>
+		<p class="w3-text-grey">{{item.description}}</p>
+		<p class="w3-text-grey">{{item.calories}} calories</p>
+		{% endif %}
+		{% endfor %}
+
+		<h2>Beverages: </h2>
+		{% for item in items %}
+		{% if item.course == 'Beverage' %}
+		<h4>{{item.name}}</h4>
+		<p class="w3-text-grey">{{item.description}}</p>
+		<p class="w3-text-grey">{{item.calories}} calories</p>
+		<a href='{{url_for('editMenuItem', restaurant_id=restaurant.id, menu_id=item.id)}}'>Edit</a></br>
+		<a href='{{url_for('deleteMenuItem', restaurant_id=restaurant.id, menu_id=item.id)}}' >Delete</a>
+		{% endif %}
+		{% endfor %}
+    </div>  
+    <div class="w3-col l6 w3-padding-large">
+    	<img src="/static/ninja.jpg" class="w3-round w3-image" alt="Menu" style="width:100%">
+    </div>
+</div>
+
+{% else %}
+You do not have any menu items yet.</br></br>
+<a href='{{url_for('newMenuItem', restaurant_id=restaurant_id)}}'>Create a New Menu Item</a></br>
+{% endif %}
+
+</body>
+</html>
