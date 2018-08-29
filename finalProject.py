@@ -196,7 +196,20 @@ def deleteMenuItem(restaurant_id, menu_id):
 		return redirect(url_for('showMenu', restaurant_id=restaurant_id))
 	else:
 		return render_template('deleteMenuItem.html', restaurant=restaurant, item=deletedItem)
-	
+
+
+#10 delete observation item
+@app.route('/restaurant/<int:restaurant_id>/observation/<int:obs_id>/delete', methods=['GET', 'POST'])
+def deleteObservation(restaurant_id, obs_id):
+	restaurant=session.query(Restaurant).filter_by(id=restaurant_id).one()
+	deletedObservation=session.query(Observations).filter_by(id=obs_id).one()
+	if request.method == 'POST':
+		session.delete(deletedObservation)
+		session.commit()
+		flash("Observation has been deleted")
+		return redirect(url_for('showMenu', restaurant_id=restaurant_id))
+	else:
+		return render_template('deleteObservation.html', restaurant=restaurant, obs=deletedObservation)	
 
 
 if __name__ == '__main__':

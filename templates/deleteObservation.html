@@ -1,0 +1,19 @@
+<html>
+<body>
+
+<h1>{{restaurant.name}}</h1>
+
+
+<form action='{{url_for('deleteObservation', restaurant_id=restaurant.id, obs_id=obs.id)}}'' method='POST'>
+
+<p>Are you sure you want to delete {{obs.description}}?</p>
+<p>
+<input type = 'submit' value = 'Delete'>
+<a href = '{{url_for('showRestaurants')}}'>Cancel</a>
+</p>
+
+</form>
+
+
+</body>
+</html>

@@ -17,6 +17,8 @@
 {% endif %}
 {% endwith %}
 
+<a href = '{{url_for('showRestaurants')}}'>Home</a>
+
 <!-- Menu Section -->
 <div class="w3-row w3-padding-64" id="menu">
 	<div class="w3-col l6 w3-padding-large">
@@ -36,6 +38,7 @@
 		<h2>Observations: </h2>
 		{% for obs in observat %}
 		<h4>{{obs.description}}</h4>
+		<a href='{{url_for('deleteObservation', restaurant_id=restaurant.id, obs_id=obs.id)}}' >Delete</a>
 		{% endfor %}
 
 
