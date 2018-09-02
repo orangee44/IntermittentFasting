@@ -55,11 +55,13 @@ def observatJSON(restaurant_id):
 @app.route('/restaurants')
 def showRestaurants():
 	restaurants = session.query(Restaurant).all()
+	fastingStatus = session.query(FastingStatus).all()
 	try:
-		restaurants 
+		restaurants
+		fastingStatus
 	except:
 		return render_template('restaurants.html')	
-	return render_template('restaurants.html', restaurants=restaurants)
+	return render_template('restaurants.html', restaurants=restaurants, fastingStatus=fastingStatus)
 
 
 #2 home page for a specific restaurant
