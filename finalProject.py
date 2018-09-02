@@ -87,7 +87,7 @@ def newRestaurant():
 		newRestaurant=Restaurant(name=request.form['name'])
 		session.add(newRestaurant)
 		session.commit()
-		flash("New restaurant created")
+		flash("New entry created")
 		return redirect(url_for('showRestaurants'))
 	else:
 		return render_template('newRestaurant.html')
