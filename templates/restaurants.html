@@ -32,10 +32,10 @@
 		<h3><a href='{{url_for('showMenu', restaurant_id=restaurant.id)}}'>{{restaurant.name}}</a></h3>
 		{% for fast in fastingStatus %}
 		{% if fast.id == restaurant.id %}
-		<h3> Fasting: {{fast.fasting}}</h3>
+		<h4> Fasting: {{fast.fasting}}</h4>
 		{% endif %}
 		{% endfor %}
-		<a href='{{url_for('editRestaurant', restaurant_id=restaurant.id)}}'>Edit</a></br>
+		<a href='{{url_for('editRestaurant', restaurant_id=restaurant.id)}}'>Edit</a>
 		<a href='{{url_for('deleteRestaurant', restaurant_id=restaurant.id)}}'>Delete</a>
 	</p>
 </div>
